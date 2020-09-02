@@ -6,6 +6,7 @@ namespace Statistics {
         float average;
         float max;
         float min;
-    };   
+    };
+    extern struct Stats statsObj;
     Stats ComputeStatistics(const std::vector<float>& );
 }
