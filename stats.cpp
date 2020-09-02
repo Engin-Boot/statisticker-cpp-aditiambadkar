@@ -3,13 +3,10 @@
 namespace Statistics {
     
     Stats ComputeStatistics(const std::vector<float>& floatVector) {
-        Stats statsObj;
+        struct Stats statsObj = {NAN, NAN, NAN};
         auto size_floatVector = floatVector.size();
         if(size_floatVector == 0)
         {
-            statsObj.average = std::numeric_limits<float>::quiet_NaN();
-            statsObj.max = std::numeric_limits<float>::quiet_NaN();
-            statsObj.min = std::numeric_limits<float>::quiet_NaN();
             return statsObj;
         }
         statsObj.average = accumulate( floatVector.begin(), floatVector.end(), 0.0) / size_floatVector;
