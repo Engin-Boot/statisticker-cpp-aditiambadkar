@@ -8,10 +8,12 @@ namespace Statistics {
         float sumVector = 0, numberOfElementsVector = 0;
         while(itr != floatVector.end())
         {
-            if(isnan(*itr))
-                continue;
-            sumVector = sumVector + *itr;
-            numberOfElementsVector++;
+            if(!isnan(*itr))
+            {
+                sumVector = sumVector + *itr;
+                numberOfElementsVector++;
+            }
+            itr++;
         }
         return sumVector / numberOfElementsVector;
     }
