@@ -9,4 +9,5 @@ namespace Statistics {
     };
     extern struct Stats statsObj;
     Stats ComputeStatistics(const std::vector<float>& );
+    float ComputeAverage(const std::vector<float>& );
 }
