@@ -8,7 +8,7 @@ namespace Statistics {
         {
             return statsObj;
         }
-        std::vector<int>::iterator itr = floatVector.begin();
+        std::vector<float>::iterator itr = floatVector.begin();
         float sumVector = 0, numberOfElementsVector = 0;
         while(itr != floatVector.end())
         {
