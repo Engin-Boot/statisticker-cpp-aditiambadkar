@@ -1,14 +1,10 @@
 #include "stats.h"
 #include <bits/stdc++.h>
+#include <math.h>
 namespace Statistics {
     
-    Stats ComputeStatistics(const std::vector<float>& floatVector) {
-        struct Stats statsObj = {NAN, NAN, NAN};
-        if(floatVector.size() == 0)
-        {
-            return statsObj;
-        }
-        std::vector<float>::iterator itr = floatVector.begin();
+    float ComputeAverage(const std::vector<float>& floatVector) {
+        std::vector<float>::iterator const_iterator = floatVector.begin();
         float sumVector = 0, numberOfElementsVector = 0;
         while(itr != floatVector.end())
         {
@@ -17,9 +13,19 @@ namespace Statistics {
             sumVector = sumVector + *itr;
             numberOfElementsVector++;
         }
-        statsObj.average = sumVector / numberOfElementsVector;
+        return sumVector / numberOfElementsVector;
+    }
+    
+    Stats ComputeStatistics(const std::vector<float>& floatVector) {
+        struct Stats statsObj = {NAN, NAN, NAN};
+        if(floatVector.size() == 0)
+        {
+            return statsObj;
+        }
+        statsObj.average = ComputeAverage(floatVector);
         statsObj.max = *max_element(floatVector.begin(), floatVector.end());
         statsObj.min = *min_element(floatVector.begin(), floatVector.end());
         return statsObj;
     }
+    
 }
