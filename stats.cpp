@@ -4,7 +4,7 @@
 namespace Statistics {
     
     float ComputeAverage(const std::vector<float>& floatVector) {
-        std::vector<float>::iterator const_iterator = floatVector.begin();
+        std::vector<float>::const_iterator itr = floatVector.begin();
         float sumVector = 0, numberOfElementsVector = 0;
         while(itr != floatVector.end())
         {
