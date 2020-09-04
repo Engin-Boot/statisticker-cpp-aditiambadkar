@@ -4,30 +4,23 @@
 namespace Statistics {
     
     float ComputeAverage(const std::vector<float>& floatVector) {
-        std::vector<float>::const_iterator itr = floatVector.begin();
         float sumVector = 0, numberOfElementsVector = 0;
-        while(itr != floatVector.end())
+        for(int i = 0; i < floatVector.size(); i++)
         {
-            if(!isnan(*itr))
-            {
-                sumVector = sumVector + *itr;
-                numberOfElementsVector++;
-            }
-            itr++;
+            if(isnan(floatVector[i]))
+                continue;
+            sumVector += floatVector[i];
+            numberOfElementsVector++;
         }
         return sumVector / numberOfElementsVector;
     }
     
     float ComputeMaximum(const std::vector<float>& floatVector) {
-        std::vector<float>::const_iterator itr = floatVector.begin();
         float max = std::numeric_limits<float>::min();
-        while(itr != floatVector.end())
+        for(int i = 0; i < floatVector.size(); i++)
         {
-            if(!isnan(*itr) && max < *itr)
-            {
-                max = *itr;
-            }
-            itr++;
+            if(!isnan(floatVector[i]) && max < floatVector[i])
+                max = floatVector[i];
         }
         if(max == std::numeric_limits<double>::min())
             return NAN;
@@ -35,15 +28,11 @@ namespace Statistics {
     }
     
     float ComputeMinimum(const std::vector<float>& floatVector) {
-        std::vector<float>::const_iterator itr = floatVector.begin();
         float min = std::numeric_limits<float>::max();
-        while(itr != floatVector.end())
+        for(int i = 0; i < floatVector.size(); i++)
         {
-            if(!isnan(*itr) && min > *itr)
-            {
-                min = *itr;
-            }
-            itr++;
+            if(!isnan(floatVector[i]) && min > floatVector[i])
+                min = floatVector[i];
         }
         if(min == std::numeric_limits<double>::max())
             return NAN;
