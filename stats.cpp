@@ -3,52 +3,30 @@
 #include <math.h>
 namespace Statistics {
     
-    float ComputeAverage(const std::vector<float>& floatVector) {
-        float sumVector = 0, numberOfElementsVector = 0;
-        for(int i = 0; i < floatVector.size(); i++)
+    std::vector<float> RemoveNANElements(const std::vector<float>& floatVector) {
+        std::vector<float> floatVectorWithoutNAN = {};
+        std::vector<float>::const_iterator itr = floatVector.begin();
+        while(itr != floatVector.end())
         {
-            if(isnan(floatVector[i]))
-                continue;
-            sumVector += floatVector[i];
-            numberOfElementsVector++;
+            if(!isnan(*itr))
+                floatVectorWithoutNAN.push_back(*itr);
+            itr++;
         }
-        return sumVector / numberOfElementsVector;
-    }
-    
-    float ComputeMaximum(const std::vector<float>& floatVector) {
-        float max = std::numeric_limits<float>::min();
-        for(int i = 0; i < floatVector.size(); i++)
-        {
-            if(!isnan(floatVector[i]) && max < floatVector[i])
-                max = floatVector[i];
-        }
-        if(max == std::numeric_limits<double>::min())
-            return NAN;
-        return max;
-    }
-    
-    float ComputeMinimum(const std::vector<float>& floatVector) {
-        float min = std::numeric_limits<float>::max();
-        for(int i = 0; i < floatVector.size(); i++)
-        {
-            if(!isnan(floatVector[i]) && min > floatVector[i])
-                min = floatVector[i];
-        }
-        if(min == std::numeric_limits<double>::max())
-            return NAN;
-        return min;
+        return floatVectorWithoutNAN;
     }
     
     Stats ComputeStatistics(const std::vector<float>& floatVector) {
         struct Stats statsObj = {NAN, NAN, NAN};
         if(floatVector.size() == 0)
-        {
             return statsObj;
-        }
-        statsObj.average = ComputeAverage(floatVector);
-        statsObj.max = ComputeMaximum(floatVector);
-        statsObj.min = ComputeMinimum(floatVector);
+        std::vector<float> floatVectorWithoutNAN = RemoveNANElements(floatVector);
+        if(floatVectorWithoutNAN.size() == 0)
+            return statsObj;
+        statsObj.average = accumulate(floatVectorWithoutNAN.begin(), floatVectorWithoutNAN.end(), 0.0) / floatVectorWithoutNAN.size();
+        statsObj.max = *max_element(floatVectorWithoutNAN.begin(), floatVectorWithoutNAN.end());
+        statsObj.min = *min_element(floatVectorWithoutNAN.begin(), floatVectorWithoutNAN.end());
         cout<<statsObj.average<<" "statsObj.max<<" "statsObj.min<<endl;
+        
         return statsObj;
     }
     
