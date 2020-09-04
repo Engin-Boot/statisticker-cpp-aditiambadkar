@@ -27,12 +27,16 @@ TEST_CASE("average, maximum and minimum is NaN for empty array") {
 }
 
 TEST_CASE("reports average, minimum and maximum of array with atleast one NAN element but not all NAN elements") {
-    auto computedStats = Statistics::ComputeStatistics({1.5, 2.5, NAN, 3.6, 2.4, NAN});
+    //auto computedStats = Statistics::ComputeStatistics({1.5, 2.5, NAN, 3.6, 2.4, NAN});
+    auto computedStats = Statistics::ComputeStatistics({NAN, NAN, NAN, 1.6, NAN});
     //Returns average, max and min of non-NAN elements
     float epsilon = 0.001;
-    REQUIRE(std::abs(computedStats.average - 2.5) < epsilon);
+    /*REQUIRE(std::abs(computedStats.average - 2.5) < epsilon);
     REQUIRE(std::abs(computedStats.max - 3.6) < epsilon);
-    REQUIRE(std::abs(computedStats.min - 1.5) < epsilon);
+    REQUIRE(std::abs(computedStats.min - 1.5) < epsilon);*/
+    REQUIRE(std::abs(computedStats.average - 1.6) < epsilon);
+    REQUIRE(std::abs(computedStats.max - 1.6) < epsilon);
+    REQUIRE(std::abs(computedStats.min - 1.6) < epsilon);
 }
 
 TEST_CASE("average, maximum and minimum is NAN for array with all NAN elements") {
