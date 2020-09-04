@@ -14,7 +14,7 @@ TEST_CASE("reports average, minimum and maximum of array with all non-NAN elemen
     REQUIRE(std::abs(computedStats.min - 1.5) < epsilon);
 }
 
-TEST_CASE("average is NaN for empty array") {
+TEST_CASE("average, maximum and minimum is NaN for empty array") {
     auto computedStats = Statistics::ComputeStatistics({});
     //All fields of computedStats (average, max, min) must be
     //NAN (not-a-number), as defined in math.h
@@ -26,8 +26,17 @@ TEST_CASE("average is NaN for empty array") {
     REQUIRE(isnan(computedStats.min) == true);
 }
 
-TEST_CASE("reports average, minimum and maximum of array with atleast one NAN element") {
+TEST_CASE("reports average, minimum and maximum of array with atleast one NAN element but not all NAN elements") {
     auto computedStats = Statistics::ComputeStatistics({1.5, 2.5, NAN, 3.6, 2.4, NAN});
+    //Returns average, max and min of non-NAN elements
+    float epsilon = 0.001;
+    REQUIRE(std::abs(computedStats.average - 2.5) < epsilon);
+    REQUIRE(std::abs(computedStats.max - 3.6) < epsilon);
+    REQUIRE(std::abs(computedStats.min - 1.5) < epsilon);
+}
+
+TEST_CASE("average, maximum and minimum is NAN for array with all NAN elements") {
+    auto computedStats = Statistics::ComputeStatistics({NAN, NAN, NAN, NAN});
     //Returns average, max and min of non-NAN elements
     float epsilon = 0.001;
     REQUIRE(std::abs(computedStats.average - 2.5) < epsilon);
