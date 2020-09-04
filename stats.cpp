@@ -25,7 +25,6 @@ namespace Statistics {
         statsObj.average = accumulate(floatVectorWithoutNAN.begin(), floatVectorWithoutNAN.end(), 0.0) / floatVectorWithoutNAN.size();
         statsObj.max = *max_element(floatVectorWithoutNAN.begin(), floatVectorWithoutNAN.end());
         statsObj.min = *min_element(floatVectorWithoutNAN.begin(), floatVectorWithoutNAN.end());
-        std::cout<<statsObj.average<<" "<< statsObj.max<<" "<<statsObj.min<<std::endl;
         
         return statsObj;
     }
