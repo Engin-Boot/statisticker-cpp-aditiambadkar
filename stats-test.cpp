@@ -37,9 +37,7 @@ TEST_CASE("reports average, minimum and maximum of array with atleast one NAN el
 
 TEST_CASE("average, maximum and minimum is NAN for array with all NAN elements") {
     auto computedStats = Statistics::ComputeStatistics({NAN, NAN, NAN, NAN});
-    //Returns average, max and min of non-NAN elements
-    float epsilon = 0.001;
-    REQUIRE(std::abs(computedStats.average - 2.5) < epsilon);
-    REQUIRE(std::abs(computedStats.max - 3.6) < epsilon);
-    REQUIRE(std::abs(computedStats.min - 1.5) < epsilon);
+    REQUIRE(isnan(computedStats.average) == true);
+    REQUIRE(isnan(computedStats.max) == true);
+    REQUIRE(isnan(computedStats.min) == true);
 }
