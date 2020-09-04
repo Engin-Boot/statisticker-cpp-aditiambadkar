@@ -48,6 +48,7 @@ namespace Statistics {
         statsObj.average = ComputeAverage(floatVector);
         statsObj.max = ComputeMaximum(floatVector);
         statsObj.min = ComputeMinimum(floatVector);
+        cout<<statsObj.average<<" "statsObj.max<<" "statsObj.min<<endl;
         return statsObj;
     }
     
