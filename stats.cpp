@@ -17,8 +17,8 @@ namespace Statistics {
     
     Stats ComputeStatistics(const std::vector<float>& floatVector) {
         struct Stats statsObj = {NAN, NAN, NAN};
-        if(floatVector.size() == 0)
-            return statsObj;
+        /*if(floatVector.size() == 0)
+            return statsObj;*/
         std::vector<float> floatVectorWithoutNAN = RemoveNANElements(floatVector);
         if(floatVectorWithoutNAN.size() == 0)
             return statsObj;
